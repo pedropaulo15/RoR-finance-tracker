@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # The bcryp gem is necessary to authenticate the user's password and encrypt it.
+gem 'devise'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
 gem 'bcrypt', '~> 3.1.7'
 # The following two gems are used to include pagination to the templates
 # gem 'will_paginate', '3.0.7'
