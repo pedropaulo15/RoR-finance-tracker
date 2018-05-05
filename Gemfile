@@ -7,6 +7,8 @@ gem 'rails', '4.2.5'
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+gem "stock_quote", '~> 2.0.0'
+
 gem 'bcrypt', '~> 3.1.7'
 # The following two gems are used to include pagination to the templates
 # gem 'will_paginate', '3.0.7'
