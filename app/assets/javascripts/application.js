@@ -15,3 +15,11 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+// Some ajax to re-render only the div tag with id of results
+// not the entire view.
+$(document).ready(function(){
+    $('#stock-lookup-form').on('ajax:complete', function(event, data, status){
+        $('#results').html(data.responseText)
+    })
+})
