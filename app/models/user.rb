@@ -27,4 +27,30 @@ class User < ActiveRecord::Base
   def can_add_stock?(ticker_symbol)
     under_stock_limit? && !stock_already_added?(ticker_symbol)
   end
+
+  def self.search(param)
+    param.strip!
+    param.downcase!
+    user_found = (first_name_matches(param) + last_name_matches(param) +
+      email_matches(param)).uniq
+
+    return nil unless user_found
+    user_found
+  end
+
+  def self.first_name_matches(param)
+    matches('first_name', param)
+  end
+
+  def self.last_name_matches(param)
+    matches('last_name', param)
+  end
+
+  def self.email_matches(param)
+    matches('email', param)
+  end
+
+  def self.matches(field_name, param)
+    User.where("#{field_name} like?", "%#{param}%")
+  end
 end
