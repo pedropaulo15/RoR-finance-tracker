@@ -9,7 +9,13 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search(params[:search_param])
-    render json: @users
+    if params[:search_param].blank?
+      flash.now[:danger] = 'You have entered an empty search string'
+    else
+      #Calling the self.method from model stock.rb file.
+      @users = User.search(params[:search_param])
+      flash.now[:danger] = 'No users match this search criteria' if @users.blank?
+    end
+    render partial: 'friends/result'
   end
 end
