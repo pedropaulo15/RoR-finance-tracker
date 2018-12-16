@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
-    "Anonymous"
+    'Anonymous'
   end
 
   def stock_already_added?(ticker_symbol)
@@ -52,5 +52,18 @@ class User < ActiveRecord::Base
 
   def self.matches(field_name, param)
     User.where("#{field_name} like?", "%#{param}%")
+  end
+
+  # This method is not a class level method (not declared with self.)
+  # that is going to run on an instance of the class.
+  # 
+  # This method is going to be called from the current_user, in order
+  # to remove himself from the search result
+  def execpt_current_user(users)
+    users.reject { |user| user.id == self.id }
+  end
+
+  def not_friends_with?(friend_id)
+    friendships.where(friend_id: friend_id).count < 1
   end
 end

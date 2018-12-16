@@ -12,8 +12,11 @@ class UsersController < ApplicationController
     if params[:search_param].blank?
       flash.now[:danger] = 'You have entered an empty search string'
     else
-      #Calling the self.method from model stock.rb file.
+      # Calling the self.method from model stock.rb file.
       @users = User.search(params[:search_param])
+      # Calling the execpt_current_user from the modal, in order
+      # to remove the current_user from the search results.
+      @users = current_user.execpt_current_user(@users)
       flash.now[:danger] = 'No users match this search criteria' if @users.blank?
     end
     render partial: 'friends/result'
